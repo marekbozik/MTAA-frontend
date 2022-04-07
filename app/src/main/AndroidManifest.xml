@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coaching">
         <activity
-            android:name=".Recipes"
-            android:label="Recipes"
+            android:name=".Login"
             android:exported="false" />
+        <activity
+            android:name=".Recipes"
+            android:exported="false"
+            android:label="Recipes" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

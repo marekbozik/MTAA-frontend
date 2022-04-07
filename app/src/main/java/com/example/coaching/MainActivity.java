@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void presmeruj()
     {
-        Intent i = new Intent(this, Recipes.class);
+        Intent i = new Intent(this, Login.class);
 
 
 
