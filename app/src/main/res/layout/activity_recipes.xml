@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/recipeLayout"
             android:orientation="vertical"
             android:layout_margin="@dimen/cardview_default_radius"
             android:layout_width="match_parent"
@@ -33,19 +34,11 @@
                 />
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="20dp"/>
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="20dp"/>
+
         </LinearLayout>
     </ScrollView>
 
