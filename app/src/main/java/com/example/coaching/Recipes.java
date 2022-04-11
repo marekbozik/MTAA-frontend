@@ -2,11 +2,13 @@ package com.example.coaching;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -72,6 +74,13 @@ public class Recipes extends AppCompatActivity {
         return null;
     }
 
+    private void navigateToRecipe(int id)
+    {
+        Intent i = new Intent(context, ShowRecipe.class);
+        i.putExtra("Recipe", getRecipeById(id));
+        context.startActivity(i);
+    }
+
     private void getImages()
     {
         for(int i = 0; i < recipes.size(); i++)
@@ -90,6 +99,12 @@ public class Recipes extends AppCompatActivity {
                     LinearLayout recipeLayout = findViewById(R.id.recipeLayout);
                     Button b = new Button(context);
                     b.setText(getRecipeById(id).getName());
+                    b.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            navigateToRecipe(id);
+                        }
+                    });
 
                     Drawable image =  new BitmapDrawable(bitmap);
                     int h = image.getIntrinsicHeight();

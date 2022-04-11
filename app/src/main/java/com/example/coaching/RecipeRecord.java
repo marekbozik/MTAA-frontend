@@ -1,11 +1,18 @@
 package com.example.coaching;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
-public class RecipeRecord implements Record {
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class RecipeRecord implements Record, Serializable {
     private int id;
     private String name;
-    private Bitmap image;
+    private transient Bitmap image;
 
     public RecipeRecord(int id, String name, Bitmap image)
     {
@@ -36,4 +43,7 @@ public class RecipeRecord implements Record {
     public Bitmap getImage() {
         return image;
     }
+
+
+
 }
