@@ -2,6 +2,7 @@ package com.example.coaching;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,9 +10,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -33,7 +37,9 @@ public class Recipes extends AppCompatActivity {
     private String s;
     AsyncHttpClient httpClient;
     private ArrayList<RecipeRecord> recipes;
-    private boolean loadDone;
+
+    private String [] spinner;
+
     private AppCompatActivity context;
 
     @Override
@@ -44,13 +50,80 @@ public class Recipes extends AppCompatActivity {
         System.out.println("recipe construct");
         context = this;
 
-        httpClient = new AsyncHttpClient();
-        loadDone = false;
 
-        getRecipes();
+        httpClient = new AsyncHttpClient();
+
+
+        getCategories();
+
+        Spinner s = findViewById(R.id.recipeSpinner);
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                LinearLayout recipeLayout = findViewById(R.id.recipeLayout);
+                recipeLayout.removeAllViews();
+
+                if (spinner[i].equals("All"))
+                {
+                    getRecipes();
+                }
+                else
+                {
+                    getRecipes(spinner[i]);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+
 
 
     }
+
+    private void getCategories()
+    {
+
+        httpClient.get(HttpHelper.getBaseAddress() + "recipe/categories", new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println("CHYBA: "  + responseString);
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                System.out.println(responseString);
+                JSONArray jsons = parseJson(responseString);
+                String[] arraySpinner = new String[jsons.length() + 1];
+                arraySpinner[0] = "All";
+                recipes = new ArrayList<>(jsons.length());
+                for (int i = 0; i < jsons.length(); i++)
+                {
+                    try {
+                        JSONObject ji = jsons.getJSONObject(i);
+                        arraySpinner[i + 1] = ji.getString("category");
+                    } catch (JSONException e) {
+
+                    }
+                }
+                spinner = arraySpinner;
+                Spinner s = findViewById(R.id.recipeSpinner);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
+                        android.R.layout.simple_spinner_item, arraySpinner);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                s.setAdapter(adapter);
+            }
+        });
+    }
+
+
 
     private JSONArray parseJson(String response)
     {
@@ -123,28 +196,33 @@ public class Recipes extends AppCompatActivity {
                 }
             });
         }
-        //showRecipes();
+
     }
 
 
-    private void showRecipes() {
+    private void getRecipes(String category) {
+        JSONArray jsons = new JSONArray();
+        httpClient.get(HttpHelper.getBaseAddress() + "/recipes/" + category, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
+            }
 
-        for(int i = 0; i < recipes.size(); i++)
-        {
-            LinearLayout recipeLayout = findViewById(R.id.recipeLayout);
-            Button b = new Button(this);
-            b.setText(recipes.get(i).getName());
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                JSONArray jsons = parseJson(responseString);
+                recipes = new ArrayList<>(jsons.length());
+                for (int i = 0; i < jsons.length(); i++) {
+                    try {
+                        JSONObject ji = jsons.getJSONObject(i);
+                        recipes.add(new RecipeRecord(ji.getInt("id"), ji.getString("name")));
+                    } catch (JSONException e) {
 
-            Drawable image = getResources().getDrawable(R.drawable.ic_baseline_home_24);
-            int h = image.getIntrinsicHeight();
-            int w = image.getIntrinsicWidth();
-            image.setBounds( 0, 0, w, h );
-
-            b.setCompoundDrawables(null, image, null, null);
-
-            recipeLayout.addView(b);
-        }
+                    }
+                }
+                getImages();
+            }
+        });
     }
 
     private void getRecipes()

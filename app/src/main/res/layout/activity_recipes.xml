@@ -6,21 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".Recipes">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/recipeLayout"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/cardview_default_radius"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/cardview_default_radius"
+        >
+
+        <Button
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
+        android:text="Pridať recept"/>
+
+        <Spinner
+            android:id="@+id/recipeSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </Spinner>
+
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/recipeLayout"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/cardview_default_radius"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
 
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
 
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -55,6 +79,8 @@
             android:textAllCaps="false"
             android:text="Recipes" />
     </LinearLayout>
+
+
 
 
 
