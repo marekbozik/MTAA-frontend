@@ -24,7 +24,7 @@ import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class Login extends AppCompatActivity {
-
+    private Button registerButton;
     private Button loginButton;
     private EditText emailEdit;
     private EditText emailPassword;
@@ -42,6 +42,13 @@ public class Login extends AppCompatActivity {
 
         httpClient = new AsyncHttpClient();
 
+        registerButton = findViewById(R.id.registerLoginButton);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toRegister(context);
+            }
+        });
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

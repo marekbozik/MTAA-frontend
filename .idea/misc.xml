@@ -9,6 +9,9 @@
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_recipes.xml" value="0.1" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_show_recipe.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.27760416666666665" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.27760416666666665" />
       </map>
     </option>
   </component>

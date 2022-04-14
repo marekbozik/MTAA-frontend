@@ -16,4 +16,16 @@ public class Navigator {
         Intent i = new Intent(context, AddRecord.class);
         context.startActivity(i);
     }
+
+    public static void toLogin(Context context)
+    {
+        Intent i = new Intent(context, Login.class);
+        context.startActivity(i);
+    }
+
+    public static void toRegister(Context context)
+    {
+        Intent i = new Intent(context, Register.class);
+        context.startActivity(i);
+    }
 }
