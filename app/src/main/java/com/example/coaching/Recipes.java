@@ -40,6 +40,7 @@ public class Recipes extends AppCompatActivity {
 
     private String [] spinner;
 
+    private Button addRecipe;
     private AppCompatActivity context;
 
     @Override
@@ -52,6 +53,15 @@ public class Recipes extends AppCompatActivity {
 
 
         httpClient = new AsyncHttpClient();
+
+
+        addRecipe = findViewById(R.id.addRecord);
+        addRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toAddRecord(context);
+            }
+        });
 
 
         getCategories();

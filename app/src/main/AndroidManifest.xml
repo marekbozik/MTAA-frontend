@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coaching">
         <activity
+            android:name=".AddRecord"
+            android:exported="false" />
+        <activity
             android:name=".ShowRecipe"
             android:exported="false" />
         <activity

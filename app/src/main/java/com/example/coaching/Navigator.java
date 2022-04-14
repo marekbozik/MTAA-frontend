@@ -10,4 +10,10 @@ public class Navigator {
         Intent i = new Intent(context, Recipes.class);
         context.startActivity(i);
     }
+
+    public static void toAddRecord(Context context)
+    {
+        Intent i = new Intent(context, AddRecord.class);
+        context.startActivity(i);
+    }
 }
