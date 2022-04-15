@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class Recipes extends AppCompatActivity {
     private String s;
     AsyncHttpClient httpClient;
     private ArrayList<RecipeRecord> recipes;
+    private ProgressBar progressBar;
+    private int lastImgId = Integer.MAX_VALUE;
 
     private String [] spinner;
 
@@ -50,7 +53,7 @@ public class Recipes extends AppCompatActivity {
 
         System.out.println("recipe construct");
         context = this;
-
+        progressBar = findViewById(R.id.recipesProgressBar);
 
         httpClient = new AsyncHttpClient();
 
@@ -71,6 +74,9 @@ public class Recipes extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.VISIBLE);
+
                 LinearLayout recipeLayout = findViewById(R.id.recipeLayout);
                 recipeLayout.removeAllViews();
 
@@ -166,6 +172,7 @@ public class Recipes extends AppCompatActivity {
 
     private void getImages()
     {
+        lastImgId = recipes.get(recipes.size()-1).getId();
         for(int i = 0; i < recipes.size(); i++)
         {
             String getString = HttpHelper.getBaseAddress() + "recipe/image/" + recipes.get(i).getId();
@@ -198,6 +205,10 @@ public class Recipes extends AppCompatActivity {
 
                     recipeLayout.addView(b);
 
+                    if (id == lastImgId){
+                        progressBar.setIndeterminate(false);
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
 
                 @Override

@@ -29,6 +29,15 @@
             android:layout_height="wrap_content">
         </Spinner>
 
+        <ProgressBar
+            android:id="@+id/recipesProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+        </ProgressBar>
 
         <ScrollView
             android:layout_width="match_parent"
