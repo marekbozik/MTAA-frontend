@@ -14,6 +14,16 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Button userbutt =  findViewById(R.id.UserButton);
+        userbutt.setText(AndroidUser.getUserName());
+
+        findViewById(R.id.HomeToRecipes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toRecipes();
+            }
+        });
+
         buttonToRecipes = findViewById(R.id.recipesMenu);
         buttonToRecipes.setOnClickListener(new View.OnClickListener() {
             @Override

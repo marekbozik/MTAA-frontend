@@ -8,6 +8,7 @@ public class AndroidUser {
     public static boolean USER_COACH = true;
 
     private static String TOKEN;
+    private static String USERNAME;
     private static int USER_ID;
     private static boolean USER_TYPE;
     private static ArrayList<Integer> FOLLOWINGS = new ArrayList<>();
@@ -42,4 +43,11 @@ public class AndroidUser {
         return FOLLOWINGS;
     }
 
+    public static String getUserName() {
+        return USERNAME;
+    }
+
+    public static void setUserName(String UserName) {
+        AndroidUser.USERNAME = UserName;
+    }
 }

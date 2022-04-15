@@ -7,6 +7,78 @@
     tools:context=".Home">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/cardview_default_radius"
+        >
+
+
+        <Button
+            android:textSize="26dp"
+            android:id="@+id/UserButton"
+            android:text="User Name"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/HomeToSettings"
+            android:text="Settings"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_settings_24"
+            >
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/HomeToRecipes"
+            android:text="Recipes"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_food_bank_24"
+            >
+        </Button>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/HomeToActivity"
+            android:text="Activity"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_directions_run_24"
+            >
+        </Button>
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/HomeToSearch"
+            android:text="Search user"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_person_search_24"
+            >
+        </Button>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/HomeToTimeline"
+            android:text="My timeline"
+            android:gravity="left|center"
+            android:drawableLeft="@drawable/ic_baseline_timeline_24"
+            >
+        </Button>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

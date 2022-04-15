@@ -22,7 +22,8 @@
             android:label="Recipes" />
         <activity
             android:name=".Home"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Home" />
         <activity
             android:name=".Login"
             android:exported="false" />

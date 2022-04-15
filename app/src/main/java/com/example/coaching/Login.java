@@ -80,6 +80,7 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         System.out.println("REGISTRATION ERROR");
+                        Utils.createToast(context, "Username or password incorrect");
                     }
 
                     @Override
@@ -92,6 +93,8 @@ public class Login extends AppCompatActivity {
                                 userType = AndroidUser.USER_FOLLOWER;
                             AndroidUser.setUserType(userType);
                             AndroidUser.setToken(reg.getString("authorization"));
+                            AndroidUser.setUserName(reg.getString("user_name"));
+
                             Intent i = new Intent(context, Home.class);
                             startActivity(i);
                         } catch (Exception e) {
