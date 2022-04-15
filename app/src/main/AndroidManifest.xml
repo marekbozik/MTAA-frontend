@@ -10,6 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Coaching">
         <activity
+            android:label="Activities"
+            android:name=".Activities"
+            android:exported="false" />
+        <activity
+            android:label="Settings"
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:label="Timeline"
+            android:name=".Timeline"
+            android:exported="false" />
+        <activity
+            android:label="Search"
+            android:name=".Search"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
