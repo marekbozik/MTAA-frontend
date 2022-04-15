@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 public class AddRecord extends AppCompatActivity {
 
@@ -20,6 +22,14 @@ public class AddRecord extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_record);
+
+        String [] spinner = {"Recipe", "Activity"};
+        Spinner s = findViewById(R.id.addSpinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
 
         uploadedImage = findViewById(R.id.uploadedImage);
         uploadImageButton =  findViewById(R.id.uploadImageButton);

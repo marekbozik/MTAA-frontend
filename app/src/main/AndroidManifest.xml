@@ -14,10 +14,12 @@
             android:exported="false" />
         <activity
             android:name=".AddRecord"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Add record" />
         <activity
             android:name=".ShowRecipe"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Recipes" />
         <activity
             android:name=".Home"
             android:exported="false" />

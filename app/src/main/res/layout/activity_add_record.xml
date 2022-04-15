@@ -6,27 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".AddRecord">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Spinner
-            android:id="@+id/addSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </Spinner>
 
-        <ImageView
-            android:id="@+id/uploadedImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageView>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/uploadImageButton"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/cardview_default_radius"
             >
-        </Button>
-    </LinearLayout>
+            <Spinner
+                android:id="@+id/addSpinner"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <ImageView
+                android:id="@+id/uploadedImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+            </ImageView>
+
+            <Button
+                android:drawableLeft="@drawable/ic_baseline_image_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uploadImageButton"
+                android:text="Upload image"
+                >
+            </Button>
+
+            <EditText
+                android:id="@+id/recordNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/recordCategoryEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Category" />
+
+            <EditText
+                android:id="@+id/editTextTextMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Create">
+            </Button>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
