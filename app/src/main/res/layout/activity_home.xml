@@ -88,6 +88,7 @@
         <Button
             android:textSize="10sp"
             android:layout_weight="1"
+            android:id="@+id/homeMenu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -51,9 +51,42 @@ public class Recipes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
 
+
         System.out.println("recipe construct");
         context = this;
         progressBar = findViewById(R.id.recipesProgressBar);
+
+
+        findViewById(R.id.RsearchMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toSearch(context);
+            }
+        });
+
+        findViewById(R.id.RtimelineMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toTimeline(context);
+            }
+        });
+
+        findViewById(R.id.RactivityMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toActivities(context);
+            }
+        });
+
+        findViewById(R.id.RhomeMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toHome(context);
+            }
+        });
+
+
+
 
         httpClient = new AsyncHttpClient();
 
@@ -66,6 +99,7 @@ public class Recipes extends AppCompatActivity {
             }
         });
 
+        getRecipes();
 
         getCategories();
 

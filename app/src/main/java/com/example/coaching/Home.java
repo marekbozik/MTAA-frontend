@@ -56,6 +56,27 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.searchMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toSearch(context);
+            }
+        });
+
+        findViewById(R.id.timelineMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toTimeline(context);
+            }
+        });
+
+        findViewById(R.id.activityMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigator.toActivities(context);
+            }
+        });
+
         buttonToRecipes = findViewById(R.id.recipesMenu);
         buttonToRecipes.setOnClickListener(new View.OnClickListener() {
             @Override
