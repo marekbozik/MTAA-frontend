@@ -168,7 +168,7 @@ public class Recipes extends AppCompatActivity {
     {
         for(int i = 0; i < recipes.size(); i++)
         {
-            String getString = "http://10.0.2.2:8000/recipe/image/" + recipes.get(i).getId();
+            String getString = HttpHelper.getBaseAddress() + "recipe/image/" + recipes.get(i).getId();
 
             httpClient.get(getString, null, new BinaryHttpResponseHandler() {
                 @Override
@@ -238,7 +238,7 @@ public class Recipes extends AppCompatActivity {
     private void getRecipes()
     {
         JSONArray jsons = new JSONArray();
-        httpClient.get("http://10.0.2.2:8000/recipes/", new TextHttpResponseHandler() {
+        httpClient.get(HttpHelper.getBaseAddress() + "recipes/", new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
