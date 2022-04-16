@@ -89,6 +89,7 @@ public class Recipes extends AppCompatActivity {
 
 
         httpClient = new AsyncHttpClient();
+        httpClient.setTimeout(120000);
 
 
         addRecipe = findViewById(R.id.addRecord);

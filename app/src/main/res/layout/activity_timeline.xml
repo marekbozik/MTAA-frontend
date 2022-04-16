@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:text="Time"
                     android:layout_margin="@dimen/cardview_default_radius"
                     android:layout_weight="5"
                     android:id="@+id/TimePicker"
@@ -29,6 +30,7 @@
                 </Button>
 
                 <Button
+                    android:text="Food or activity"
                     android:layout_weight="3"
                     android:layout_margin="@dimen/cardview_default_radius"
                     android:layout_width="match_parent"

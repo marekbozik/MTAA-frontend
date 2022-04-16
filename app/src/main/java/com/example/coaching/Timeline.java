@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class Timeline extends AppCompatActivity {
 
@@ -74,31 +76,66 @@ public class Timeline extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.TimePicker).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                        return;
-                    }
-                }, 0,0 , true).show();
-            }
-        });
+
         getContent();
 
     }
 
-    private void changeTimelineId(int id, int val1, int val2)
+    private void changeTimelineId(int id, Calendar calendar, int val1, int val2)
     {
         System.out.println("Val1: " + val1);
         System.out.println("Val2: " + val2);
+
+        //2020-12-18 13:11:09
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.GERMANY);
+        String timestamp = calendar.get(Calendar.YEAR) + "-" +  "0"  + (calendar.get(Calendar.MONTH) + 1) + "-" +  calendar.get(Calendar.DAY_OF_MONTH) + " " +
+                            val1 + ":" + val2 + ":00";
+
+        JSONObject jsonParams = new JSONObject();
+        try {
+            jsonParams.put("timestamp", timestamp);
+            jsonParams.put("id", id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        StringEntity entity = null;
+        try {
+            entity = new StringEntity(jsonParams.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Authorization", AndroidUser.getToken());
+        client.put(context, HttpHelper.getBaseAddress() + "timeline/" + AndroidUser.getUserId(), entity, "application/json", new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                System.out.println(responseString);
+                Utils.createToast(context, "Timestamp change failed");
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Utils.createToast(context, "Timestamp changed");
+                Navigator.toTimeline(context);
+
+            }
+        });
+
+        System.out.println(timestamp);
+
+
 
     }
 
     private void getContent()
     {
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setTimeout(60000);
         client.addHeader("Authorization", AndroidUser.getToken());
 
         client.get(HttpHelper.getBaseAddress() + "timeline/" + AndroidUser.getUserId(), new TextHttpResponseHandler() {
@@ -172,8 +209,12 @@ public class Timeline extends AppCompatActivity {
 
                         System.out.println(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND) + " " +
                                 calendar.get(Calendar.YEAR) + "-" +  calendar.get(Calendar.MONTH) + "-" + calendar.get(Calendar.DAY_OF_MONTH));
-                        buttonTime.setText(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND) + " " +
+
+                        buttonTime.setCompoundDrawablesWithIntrinsicBounds(getDrawable(R.drawable.ic_baseline_access_time_24),null, null, null);
+                        buttonTime.setText(o.getString("timestamp").split("T")[1].split("[.]")[0].split("Z")[0] + " " +
                                 calendar.get(Calendar.YEAR) + "-" +  (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH));
+                        //buttonTime.setText(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND) + " " +
+                         //       calendar.get(Calendar.YEAR) + "-" +  (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH));
 
                         buttonTime.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -182,7 +223,7 @@ public class Timeline extends AppCompatActivity {
                                 @Override
                                 public void onTimeSet(TimePicker timePicker, int i, int i1) {
                                     try {
-                                        changeTimelineId(o.getInt("id"), i, i1);
+                                        changeTimelineId(o.getInt("id"), calendar, i, i1);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

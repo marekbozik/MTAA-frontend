@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonStreamerEntity;
@@ -36,6 +37,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ProgressBar pb = findViewById(R.id.LoginProgressBar);
+        pb.setIndeterminate(true);
+        pb.setVisibility(View.GONE);
+
         emailEdit = findViewById(R.id.editTextTextEmailAddress);
         emailPassword = findViewById(R.id.editTextTextPassword);
         context = this;
@@ -59,7 +64,8 @@ public class Login extends AppCompatActivity {
     }
 
     private void login(){
-
+        ProgressBar pb = findViewById(R.id.LoginProgressBar);
+        pb.setVisibility(View.VISIBLE);
         JSONObject jsonParams = new JSONObject();
         try {
             jsonParams.put("email", emailEdit.getText().toString());
@@ -80,6 +86,8 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         System.out.println("REGISTRATION ERROR");
+                        ProgressBar pb = findViewById(R.id.LoginProgressBar);
+                        pb.setVisibility(View.GONE);
                         Utils.createToast(context, "Username or password incorrect");
                     }
 
@@ -100,6 +108,8 @@ public class Login extends AppCompatActivity {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        ProgressBar pb = findViewById(R.id.LoginProgressBar);
+                        pb.setVisibility(View.GONE);
                     }
                 });
         //httpClient.post("http://10.0.2.2:8000/login/", )
