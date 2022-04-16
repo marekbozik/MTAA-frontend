@@ -75,17 +75,19 @@ public class Login extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        System.out.println("posielam sem: " + HttpHelper.getBaseAddress() + "login/");
         httpClient.post(this, HttpHelper.getBaseAddress() + "login/", entity, "application/json",
                 new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        System.out.println("REGISTRATION ERROR");
+                        System.out.println("REGISTRATION pice ERROR");
                         Utils.createToast(context, "Username or password incorrect");
                     }
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
                         try {
+                            System.out.println("RESPONSE STR: " + responseString);
                             JSONObject reg = new JSONObject(responseString);
                             AndroidUser.setUserId(reg.getInt("user_id"));
                             boolean userType = AndroidUser.USER_COACH;

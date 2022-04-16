@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.coaching.tutorial.CompleteActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //LauncherActivity launch = new LauncherActivity();
+                //launch.openSampleSocketActivity(view);
                 presmeruj();
             }
         });
@@ -38,14 +42,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void presmeruj()
-    {
-        Intent i = new Intent(this, Login.class);
+    {/*
+        setContentView(R.layout.activity_launcher);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        startActivity(new Intent(this, CompleteActivity.class));*/
+
+        Intent i = new Intent(this, LauncherActivity.class);
 
 
 
         button.setText("Stlacene");
         startActivity(i);
         System.out.println("start recipe");
+
+
     }
 
 }
