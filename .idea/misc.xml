@@ -3,14 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.193" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_add_record.xml" value="0.25" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_recipes.xml" value="0.33" />
         <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_show_recipe.xml" value="0.33" />
-        <entry key="..\:/Users/marek/AndroidStudioProjects/Coaching/app/src/main/res/layout/activity_timeline.xml" value="0.29743589743589743" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1328125" />
+        <entry key="app/src/main/res/layout/activity_sample_peer_connection.xml" value="0.27760416666666665" />
       </map>
     </option>
   </component>

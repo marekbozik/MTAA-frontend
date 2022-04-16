@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.coaching">
 
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,22 +24,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Coaching">
+
         <activity
-            android:label="Activities"
+            android:name="com.shivam.androidwebrtc.app_rtc_sample.main.AppRTCMainActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.shivam.androidwebrtc.app_rtc_sample.call.CallActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="fullUser"
+            android:theme="@style/AppTheme.Call" />
+
+
+        <activity
+            android:name="com.example.coaching.LauncherActivity"
+            android:label="@string/title_activity_launch"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".Activities"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Activities" />
         <activity
-            android:label="Settings"
             android:name=".Settings"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Settings" />
         <activity
-            android:label="Timeline"
             android:name=".Timeline"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Timeline" />
         <activity
-            android:label="Search"
             android:name=".Search"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Search" />
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -56,6 +88,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.coaching.tutorial.CompleteActivity"
+            android:label="@string/title_activity_complete"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
     </application>
 
 </manifest>

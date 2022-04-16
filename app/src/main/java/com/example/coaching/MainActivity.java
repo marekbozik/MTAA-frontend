@@ -7,7 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.coaching.tutorial.CompleteActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -25,17 +27,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
+        findViewById(R.id.webRTC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presmerujWebRTC();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //LauncherActivity launch = new LauncherActivity();
+                //launch.openSampleSocketActivity(view);
                 presmeruj();
             }
         });
     }
 
 
+    private void presmerujWebRTC(){
+        Intent i = new Intent(this, LauncherActivity.class);
 
-
+        button.setText("Stlacene");
+        startActivity(i);
+    }
 
     private void presmeruj()
     {
