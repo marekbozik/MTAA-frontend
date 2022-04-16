@@ -99,7 +99,7 @@ public class Recipes extends AppCompatActivity {
             }
         });
 
-        getRecipes();
+        //getRecipes();
 
         getCategories();
 

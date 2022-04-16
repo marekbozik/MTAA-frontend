@@ -2,13 +2,16 @@ package com.example.coaching;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BinaryHttpResponseHandler;
@@ -17,18 +20,27 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class ShowRecipe extends AppCompatActivity {
 
     private TextView recipeText;
     private AsyncHttpClient httpClient;
     private ImageView imageView;
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_show_recipe);
+        context = this;
         RecipeRecord rec = (RecipeRecord) getIntent().getSerializableExtra("Recipe");
         TextView t =  findViewById(R.id.recipeViewName);
         t.setText(rec.getName());
@@ -40,6 +52,41 @@ public class ShowRecipe extends AppCompatActivity {
 
         showRecipeText(rec.getId());
         showRecipeImage(rec.getId());
+
+        findViewById(R.id.recipeAddToTimeline).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                JSONObject t = new JSONObject();
+                try {
+                    t.put("user_id", AndroidUser.getUserId());
+                    t.put("recipe_id", rec.getId());
+                }
+                catch (Exception e) {
+                    return;
+                }
+
+                StringEntity entity = null;
+                try {
+                    entity = new StringEntity(t.toString());
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                httpClient.addHeader("Authorization", AndroidUser.getToken());
+                httpClient.post(context, HttpHelper.getBaseAddress() + "timeline/recipe/", entity, "application/json", new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Utils.createToast(context, "Adding to timeline failed");
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Utils.createToast(context, "Added to timeline");
+                    }
+                });
+            }
+        });
 
         //System.out.println("NOVE SCREEN:" + rec.getName());
     }

@@ -53,6 +53,7 @@
             </TextView>
 
                 <Button
+                    android:id="@+id/recipeAddToTimeline"
                     android:gravity="left|center"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
