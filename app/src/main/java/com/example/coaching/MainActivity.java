@@ -27,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
+        findViewById(R.id.webRTC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presmerujWebRTC();
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,25 +44,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void presmerujWebRTC(){
+        Intent i = new Intent(this, LauncherActivity.class);
 
-
+        button.setText("Stlacene");
+        startActivity(i);
+    }
 
     private void presmeruj()
-    {/*
-        setContentView(R.layout.activity_launcher);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        startActivity(new Intent(this, CompleteActivity.class));*/
-
-        Intent i = new Intent(this, LauncherActivity.class);
+    {
+        Intent i = new Intent(this, Login.class);
 
 
 
         button.setText("Stlacene");
         startActivity(i);
         System.out.println("start recipe");
-
-
     }
 
 }
