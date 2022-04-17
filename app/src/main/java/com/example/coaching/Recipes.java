@@ -96,6 +96,7 @@ public class Recipes extends AppCompatActivity {
         addRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AndroidUser.setAddingRecord(AndroidUser.RECORD_TYPE_RECIPE);
                 Navigator.toAddRecord(context);
             }
         });

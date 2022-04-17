@@ -6,7 +6,11 @@ public class AndroidUser {
 
     public static boolean USER_FOLLOWER = false;
     public static boolean USER_COACH = true;
+    public static String RECORD_TYPE_RECIPE = "recipe";
+    public static String RECORD_TYPE_ACTIVITY = "activity";
 
+
+    private static String ADDING_RECORD = "recipe";
     private static String TOKEN;
     private static String USERNAME;
     private static int USER_ID;
@@ -42,6 +46,17 @@ public class AndroidUser {
     public static ArrayList<Integer> getFOLLOWINGS() {
         return FOLLOWINGS;
     }
+
+    public static String getAddingRecord()
+    {
+        return ADDING_RECORD;
+    }
+
+    public static void setAddingRecord(String RECORD_TYPE)
+    {
+        ADDING_RECORD = RECORD_TYPE;
+    }
+
 
     public static String getUserName() {
         return USERNAME;

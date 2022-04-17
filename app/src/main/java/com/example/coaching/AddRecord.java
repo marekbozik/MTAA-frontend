@@ -81,8 +81,15 @@ public class AddRecord extends AppCompatActivity {
             }
         });
 
-
-        String [] spinner = {"Recipe", "Activity"};
+        String [] spinner =  null;
+        if (AndroidUser.getAddingRecord().equals(AndroidUser.RECORD_TYPE_RECIPE))
+        {
+            spinner = new String [] {"recipe", "activity"};
+        }
+        else
+        {
+            spinner = new String [] {"activity", "recipe"};
+        }
         Spinner s = findViewById(R.id.addSpinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -208,8 +215,11 @@ public class AddRecord extends AppCompatActivity {
 
         Utils.createToast(this, "Creating new record...");
 
+
+        Spinner s = findViewById(R.id.addSpinner);
+
         httpClient.addHeader("Authorization", AndroidUser.getToken());
-        httpClient.post(this, HttpHelper.getBaseAddress() + "recipe/", entity, "application/json",
+        httpClient.post(this, HttpHelper.getBaseAddress() + s.getSelectedItem().toString() + "/", entity, "application/json",
                 new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -248,17 +258,26 @@ public class AddRecord extends AppCompatActivity {
 
                         HttpEntity imageEntity = new ByteArrayEntity(byteArray);
 
-                        httpClient.post(context, HttpHelper.getBaseAddress() + "recipe/image/" + id, imageEntity, "application/octet-stream",
+                        httpClient.post(context, HttpHelper.getBaseAddress() + s.getSelectedItem().toString() +"/image/" + id, imageEntity, "application/octet-stream",
                                 new TextHttpResponseHandler() {
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                                         System.out.println("OBRAZOK NEPOSLANY " + statusCode);
-                                        Navigator.toRecipes(context);
+                                        Spinner s = findViewById(R.id.addSpinner);
+                                        if (s.getSelectedItem().toString().equals("recipe"))
+                                            Navigator.toRecipes(context);
+                                        else
+                                            Navigator.toActivities(context);
+
                                     }
 
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                                        Spinner s = findViewById(R.id.addSpinner);
+                                        if (s.getSelectedItem().toString().equals("recipe"))
                                             Navigator.toRecipes(context);
+                                        else
+                                            Navigator.toActivities(context);
                                     }
                                 });
 
