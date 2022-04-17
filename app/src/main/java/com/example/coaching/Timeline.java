@@ -239,18 +239,22 @@ public class Timeline extends AppCompatActivity {
                         subL.addView(buttonTime);
                         subL.addView(b);
 
-                        records.add(subL);
+                        LinearLayout tll = findViewById(R.id.timelineLayout);
+                        tll.addView(subL);
+
+                        //records.add(subL);
 
                         //records.add(b);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                /*
                 for (int i = 0; i < records.size(); i++)
                 {
                     LinearLayout tll = findViewById(R.id.timelineLayout);
                     tll.addView(records.get(i));
-                }
+                }*/
                 ProgressBar pb = findViewById(R.id.timelineProgressBar);
                 pb.setIndeterminate(false);
                 pb.setVisibility(View.GONE);
