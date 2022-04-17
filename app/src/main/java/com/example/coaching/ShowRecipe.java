@@ -35,13 +35,28 @@ public class ShowRecipe extends AppCompatActivity {
     private AsyncHttpClient httpClient;
     private ImageView imageView;
     private Context context;
+    private boolean isRecipe;
+    private RecipeRecord rec;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_show_recipe);
         context = this;
-        RecipeRecord rec = (RecipeRecord) getIntent().getSerializableExtra("Recipe");
+
+
+
+        isRecipe = true;
+        try {
+            rec = (RecipeRecord) getIntent().getSerializableExtra("Recipe");
+            rec.getName();
+        }
+        catch (Exception e)
+        {
+            rec = (RecipeRecord) getIntent().getSerializableExtra("Activity");
+            isRecipe = false;
+
+        }
         TextView t =  findViewById(R.id.recipeViewName);
         t.setText(rec.getName());
         recipeText =  findViewById(R.id.recipeViewText);
@@ -60,7 +75,11 @@ public class ShowRecipe extends AppCompatActivity {
                 JSONObject t = new JSONObject();
                 try {
                     t.put("user_id", AndroidUser.getUserId());
-                    t.put("recipe_id", rec.getId());
+                    if (isRecipe)
+                        t.put("recipe_id", rec.getId());
+                    else
+                        t.put("activity_id", rec.getId());
+
                 }
                 catch (Exception e) {
                     return;
@@ -73,8 +92,11 @@ public class ShowRecipe extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+                String s = "recipe";
+                if (!isRecipe)
+                    s = "activity";
                 httpClient.addHeader("Authorization", AndroidUser.getToken());
-                httpClient.post(context, HttpHelper.getBaseAddress() + "timeline/recipe/", entity, "application/json", new TextHttpResponseHandler() {
+                httpClient.post(context, HttpHelper.getBaseAddress() + "timeline/" + s + "/", entity, "application/json", new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         Utils.createToast(context, "Adding to timeline failed");
@@ -93,7 +115,10 @@ public class ShowRecipe extends AppCompatActivity {
 
     private void showRecipeText(int id)
     {
-        httpClient.get(HttpHelper.getBaseAddress() + "recipe/" + id, new TextHttpResponseHandler() {
+        String s = "recipe";
+        if (!isRecipe)
+            s = "activity";
+        httpClient.get(HttpHelper.getBaseAddress() + s + "/" + id, new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -117,7 +142,10 @@ public class ShowRecipe extends AppCompatActivity {
 
     private void showRecipeImage(int id)
     {
-        httpClient.get(HttpHelper.getBaseAddress() + "recipe/image/" + id, new BinaryHttpResponseHandler() {
+        String s = "recipe";
+        if (!isRecipe)
+            s = "activity";
+        httpClient.get(HttpHelper.getBaseAddress() + s + "/image/" + id, new BinaryHttpResponseHandler() {
 
 
             @Override

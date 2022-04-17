@@ -194,7 +194,7 @@ public class Activities extends AppCompatActivity {
     private void navigateToRecipe(int id)
     {
         Intent i = new Intent(context, ShowRecipe.class);
-        i.putExtra("Recipe", getRecipeById(id));
+        i.putExtra("Activity", getRecipeById(id));
         context.startActivity(i);
     }
 
