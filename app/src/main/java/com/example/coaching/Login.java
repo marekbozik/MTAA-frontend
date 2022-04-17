@@ -11,17 +11,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonStreamerEntity;
-import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
 import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpEntity;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
 public class Login extends AppCompatActivity {
@@ -95,11 +93,29 @@ public class Login extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, String responseString) {
                         try {
                             JSONObject reg = new JSONObject(responseString);
+                            System.out.println(reg);
                             AndroidUser.setUserId(reg.getInt("user_id"));
                             boolean userType = AndroidUser.USER_COACH;
                             if (reg.getString("user_type").equals("follower"))
                                 userType = AndroidUser.USER_FOLLOWER;
+                            System.out.println("user_type: " + userType);
                             AndroidUser.setUserType(userType);
+
+                            JSONArray followings = null;
+                            try {
+                                JSONArray arr = reg.getJSONArray("followings");
+                                System.out.println("arr: " + arr);
+                                for (int i = 0; i < arr.length(); i++)
+                                {
+                                    AndroidUser.addFollowing(arr.getJSONObject(i).getInt("coach"));
+                                }
+
+                            }
+                            catch (JSONException e){
+                                System.out.println("prazdny zoznam");
+                                AndroidUser.resetFOLLOWINGS();
+                            }
+                            System.out.println("followings: " + AndroidUser.getFOLLOWINGS());
                             AndroidUser.setToken(reg.getString("authorization"));
                             AndroidUser.setUserName(reg.getString("user_name"));
 

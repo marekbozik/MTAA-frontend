@@ -4,11 +4,16 @@ package com.example.coaching.tutorial;
 
 import android.Manifest;
 import androidx.databinding.DataBindingUtil;
+
+import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
+import com.example.coaching.Navigator;
+import com.example.coaching.Search;
 import com.example.coaching.databinding.ActivitySamplePeerConnectionBinding;
 //import com.google.firebase.firestore.FirebaseFirestore;
 import com.example.coaching.R;
@@ -81,12 +86,14 @@ public class CompleteActivity extends AppCompatActivity {
     //Firestore
     //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sample_peer_connection);
         setSupportActionBar(binding.toolbar);
-
+        context = this;
         start();
     }
 
@@ -96,13 +103,14 @@ public class CompleteActivity extends AppCompatActivity {
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
-    @Override
-    protected void onDestroy() {
+    //@Override
+    public void onDestroy(View view) {
         if (socket != null) {
             sendMessage("bye");
             socket.disconnect();
         }
         super.onDestroy();
+        Navigator.toSearch(context);
     }
 
     @AfterPermissionGranted(RC_CALL)

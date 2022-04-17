@@ -28,10 +28,11 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="5">
 
                 <org.webrtc.SurfaceViewRenderer
                     android:id="@+id/surface_view"
@@ -50,7 +51,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="5">
 
                 <org.webrtc.SurfaceViewRenderer
                     android:id="@+id/surface_view2"
@@ -64,7 +65,27 @@
                     android:textColor="#fff"
                     android:layout_margin="16dp"
                     android:layout_height="wrap_content" />
+
             </FrameLayout>
+            
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/endCallButton"
+                    android:layout_width="match_parent"
+                    android:text="End call"
+                    android:background="#FF0000"
+                    android:onClick="onDestroy"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"></Button>
+
+
+            </FrameLayout>
+
+
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

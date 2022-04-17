@@ -15,7 +15,7 @@ public class AndroidUser {
     private static String USERNAME;
     private static int USER_ID;
     private static boolean USER_TYPE;
-    private static ArrayList<Integer> FOLLOWINGS = new ArrayList<>();
+    private static ArrayList<Integer> FOLLOWINGS = new ArrayList<Integer>();
 
     public static void setToken(String token)
     {
@@ -42,6 +42,14 @@ public class AndroidUser {
     public static void setUserType(boolean userType) {
         USER_TYPE = userType;
     }
+
+    public static boolean getUserType() { return USER_TYPE; }
+
+    public static void addFollowing(int userId){ FOLLOWINGS.add(userId); }
+
+    public static void resetFOLLOWINGS(){ FOLLOWINGS = new ArrayList<Integer>(); }
+
+    public static void removeFollowing(int userId){ FOLLOWINGS.remove(userId); }
 
     public static ArrayList<Integer> getFOLLOWINGS() {
         return FOLLOWINGS;
