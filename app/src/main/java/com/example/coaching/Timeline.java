@@ -176,8 +176,13 @@ public class Timeline extends AppCompatActivity {
                             b.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    //TODO
-                                    Utils.createToast(context, "Not implemented");
+
+                                    try {
+                                        Navigator.toActivity(context, new RecipeRecord(o.getInt("record_id"), o.getString("record_name")));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
                             });
                         }

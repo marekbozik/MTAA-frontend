@@ -36,6 +36,13 @@ public class Navigator {
         context.startActivity(i);
     }
 
+    public static void toActivity(Context context, RecipeRecord id)
+    {
+        Intent i = new Intent(context, ShowRecipe.class);
+        i.putExtra("Activity", id);
+        context.startActivity(i);
+    }
+
 
     public static void toActivities(Context context)
     {
