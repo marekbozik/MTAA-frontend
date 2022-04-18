@@ -12,6 +12,8 @@ public class AndroidUser {
     public static String RECORD_TYPE_ACTIVITY = "activity";
 
 
+    private static boolean isMyTimeline = true;
+    private static int timelineId = 0;
     private static String ADDING_RECORD = "recipe";
     private static String TOKEN;
     private static String USERNAME;
@@ -82,4 +84,20 @@ public class AndroidUser {
     public static void setSearchResult(int userId){ SEARCHRESULTS.add(userId); }
 
     public static void resetSearchResult(){ SEARCHRESULTS.clear(); }
+
+    public static boolean isIsMyTimeline() {
+        return isMyTimeline;
+    }
+
+    public static void setIsMyTimeline(boolean isMyTimeline) {
+        AndroidUser.isMyTimeline = isMyTimeline;
+    }
+
+    public static void setTimelineId(int timelineId) {
+        AndroidUser.timelineId = timelineId;
+    }
+
+    public static int getTimelineId() {
+        return timelineId;
+    }
 }

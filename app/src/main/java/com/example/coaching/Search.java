@@ -261,6 +261,22 @@ public class Search extends AppCompatActivity {
                         JSONObject o = jsonArray.getJSONObject(i);
 
                         Button b = new Button(context);
+
+                        if (AndroidUser.getUserType() == AndroidUser.USER_COACH)
+                        {
+                            if(AndroidUser.getFOLLOWINGS().contains(o.getInt("id")))
+                            {
+                                AndroidUser.setTimelineId(o.getInt("id"));
+                                AndroidUser.setIsMyTimeline(false);
+                                b.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Navigator.toTimeline(context);
+                                    }
+                                });
+                            }
+                        }
+
                         b.setText(o.getString("name"));
                         b.setGravity(Gravity.CENTER | Gravity.LEFT);
 

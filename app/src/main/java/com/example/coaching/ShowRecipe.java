@@ -68,6 +68,9 @@ public class ShowRecipe extends AppCompatActivity {
         showRecipeText(rec.getId());
         showRecipeImage(rec.getId());
 
+        if (AndroidUser.getUserType() == AndroidUser.USER_COACH){
+            findViewById(R.id.recipeAddToTimeline).setVisibility(View.GONE);
+        }
         findViewById(R.id.recipeAddToTimeline).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

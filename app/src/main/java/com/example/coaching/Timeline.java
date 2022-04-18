@@ -138,9 +138,35 @@ public class Timeline extends AppCompatActivity {
         client.setTimeout(60000);
         client.addHeader("Authorization", AndroidUser.getToken());
 
-        client.get(HttpHelper.getBaseAddress() + "timeline/" + AndroidUser.getUserId(), new TextHttpResponseHandler() {
+        int userId;
+        if (AndroidUser.isIsMyTimeline()) {
+           userId = AndroidUser.getUserId();
+           if (AndroidUser.getUserType() == AndroidUser.USER_COACH)
+           {
+               ProgressBar pb = findViewById(R.id.timelineProgressBar);
+               pb.setIndeterminate(false);
+               pb.setVisibility(View.GONE);
+               LinearLayout tll = findViewById(R.id.timelineLayout);
+               Button b = new Button(context);
+               b.setText("Login as follower to see personal timeline");
+               b.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Navigator.toLogin(context);
+                   }
+               });
+               tll.addView(b);
+               return;
+           }
+        }
+        else{
+            userId = AndroidUser.getTimelineId();
+        }
+
+        client.get(HttpHelper.getBaseAddress() + "timeline/" + userId, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
 
             }
 
@@ -221,21 +247,25 @@ public class Timeline extends AppCompatActivity {
                         //buttonTime.setText(calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" + calendar.get(Calendar.SECOND) + " " +
                          //       calendar.get(Calendar.YEAR) + "-" +  (calendar.get(Calendar.MONTH) + 1) + "-" + calendar.get(Calendar.DAY_OF_MONTH));
 
-                        buttonTime.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                    try {
-                                        changeTimelineId(o.getInt("id"), calendar, i, i1);
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
+                        if (AndroidUser.isIsMyTimeline())
+                        {
+                            buttonTime.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
+                                    @Override
+                                    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                        try {
+                                            changeTimelineId(o.getInt("id"), calendar, i, i1);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                }
-                            }, 0,0 , true).show();
+                                }, 0,0 , true).show();
+                            }
+                        });
+
                         }
-                    });
 
                         LinearLayout subL = new LinearLayout(context);
                         subL.setOrientation(LinearLayout.HORIZONTAL);
@@ -263,6 +293,8 @@ public class Timeline extends AppCompatActivity {
                 ProgressBar pb = findViewById(R.id.timelineProgressBar);
                 pb.setIndeterminate(false);
                 pb.setVisibility(View.GONE);
+                AndroidUser.setIsMyTimeline(true);
+
             }
         });
 
