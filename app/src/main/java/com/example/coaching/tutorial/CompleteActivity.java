@@ -6,6 +6,7 @@ import android.Manifest;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -101,16 +102,10 @@ public class CompleteActivity extends AppCompatActivity {
         endCallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if (socket != null) {
-                        sendMessage("bye");
-                        socket.disconnect();
-                    }
-                    Navigator.toSearch(context);
-                }
-                catch (Exception e){
+                peerConnection.close();
 
-                }
+                Navigator.toSearch(context);
+                finish();
             }
         });
         start();
@@ -127,6 +122,7 @@ public class CompleteActivity extends AppCompatActivity {
         if (socket != null) {
             sendMessage("bye");
             socket.disconnect();
+            socket.close();
         }
         super.onDestroy();
     }
