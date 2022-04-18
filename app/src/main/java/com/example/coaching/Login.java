@@ -102,12 +102,17 @@ public class Login extends AppCompatActivity {
                             AndroidUser.setUserType(userType);
 
                             JSONArray followings = null;
+
+                            String param = "follower";
+                            if(AndroidUser.getUserType() == AndroidUser.USER_FOLLOWER){
+                                param = "coach";
+                            }
                             try {
                                 JSONArray arr = reg.getJSONArray("followings");
                                 System.out.println("arr: " + arr);
                                 for (int i = 0; i < arr.length(); i++)
                                 {
-                                    AndroidUser.addFollowing(arr.getJSONObject(i).getInt("coach"));
+                                    AndroidUser.addFollowing(arr.getJSONObject(i).getInt(param));
                                 }
 
                             }

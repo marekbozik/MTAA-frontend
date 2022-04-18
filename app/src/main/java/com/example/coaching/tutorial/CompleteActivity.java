@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.coaching.Navigator;
 import com.example.coaching.Search;
@@ -87,6 +88,7 @@ public class CompleteActivity extends AppCompatActivity {
     //FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private Context context;
+    private Button endCallButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,23 @@ public class CompleteActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sample_peer_connection);
         setSupportActionBar(binding.toolbar);
         context = this;
+
+        endCallButton = findViewById(R.id.endCallButton);
+        endCallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    if (socket != null) {
+                        sendMessage("bye");
+                        socket.disconnect();
+                    }
+                    Navigator.toSearch(context);
+                }
+                catch (Exception e){
+
+                }
+            }
+        });
         start();
     }
 
@@ -104,13 +123,12 @@ public class CompleteActivity extends AppCompatActivity {
     }
 
     //@Override
-    public void onDestroy(View view) {
+    public void onDestroy() {
         if (socket != null) {
             sendMessage("bye");
             socket.disconnect();
         }
         super.onDestroy();
-        Navigator.toSearch(context);
     }
 
     @AfterPermissionGranted(RC_CALL)

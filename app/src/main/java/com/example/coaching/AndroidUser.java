@@ -1,5 +1,7 @@
 package com.example.coaching;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 public class AndroidUser {
@@ -16,6 +18,7 @@ public class AndroidUser {
     private static int USER_ID;
     private static boolean USER_TYPE;
     private static ArrayList<Integer> FOLLOWINGS = new ArrayList<Integer>();
+    private static ArrayList<Integer> SEARCHRESULTS = new ArrayList<Integer>();
 
     public static void setToken(String token)
     {
@@ -73,4 +76,10 @@ public class AndroidUser {
     public static void setUserName(String UserName) {
         AndroidUser.USERNAME = UserName;
     }
+
+    public static ArrayList<Integer> getSearchResult(){ return SEARCHRESULTS; }
+
+    public static void setSearchResult(int userId){ SEARCHRESULTS.add(userId); }
+
+    public static void resetSearchResult(){ SEARCHRESULTS.clear(); }
 }
