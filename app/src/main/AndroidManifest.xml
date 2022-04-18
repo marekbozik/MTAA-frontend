@@ -24,7 +24,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Coaching">
-
+        <activity
+            android:name=".ChangeName"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePasswd"
+            android:exported="false" />
         <activity
             android:name="com.shivam.androidwebrtc.app_rtc_sample.main.AppRTCMainActivity"
             android:label="@string/app_name"
@@ -35,12 +40,10 @@
             android:label="@string/app_name"
             android:screenOrientation="fullUser"
             android:theme="@style/AppTheme.Call" />
-
-
         <activity
-            android:name="com.example.coaching.LauncherActivity"
+            android:name=".LauncherActivity"
             android:label="@string/title_activity_launch"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities"
             android:exported="false"
@@ -89,10 +92,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.coaching.tutorial.CompleteActivity"
+            android:name=".tutorial.CompleteActivity"
             android:label="@string/title_activity_complete"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

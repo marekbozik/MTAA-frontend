@@ -74,4 +74,16 @@ public class Navigator {
         context.startActivity(i);
     }
 
+    public static void toChangePasswd(Context context)
+    {
+        Intent i = new Intent(context, ChangePasswd.class);
+        context.startActivity(i);
+    }
+
+    public static void toChangeName(Context context)
+    {
+        Intent i = new Intent(context, ChangeName.class);
+        context.startActivity(i);
+    }
+
 }
