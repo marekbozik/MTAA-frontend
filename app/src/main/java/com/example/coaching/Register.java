@@ -83,15 +83,13 @@ public class Register extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 System.out.println("REGISTRATION ERROR");
+                Utils.createToast(context, "User with this email already exists");
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 try {
-                    //JSONObject reg = new JSONObject(responseString);
-            /*if(statusCode >= 200 && statusCode <= 210){
-
-            }*/
+                    Utils.createToast(context, "Registration successful");
                     Navigator.toLogin(context);
                 } catch (Exception e) {
                     e.printStackTrace();

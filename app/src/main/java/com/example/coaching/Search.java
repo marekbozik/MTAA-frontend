@@ -136,6 +136,9 @@ public class Search extends AppCompatActivity {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 System.out.println("Zlyhalo to");
+                LinearLayout tll = findViewById(R.id.searchLayout);
+                tll.removeAllViews();
+                Utils.createToast(context, "User with this name doesn't exist");
             }
 
             @Override
@@ -239,7 +242,8 @@ public class Search extends AppCompatActivity {
         client.get(HttpHelper.getBaseAddress() + searchURL, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                System.out.println("Zlyhalo to");
+                System.out.println("Zlyhalo to dsdas");
+                Utils.createToast(context, "User with this name doesn't exist");
             }
 
             @Override
